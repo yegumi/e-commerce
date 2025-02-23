@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<form action="" method="post" novalidate >
+  {% csrf_token %}
+  {{form.as_p}}
+  <input class="col-md-3 mb-3" type="submit" value="send" style="background-color: #ffc1cb;">
+</form>
+
+{% endblock %}

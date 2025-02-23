@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+{% block content %}
+{%load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'home/css/product.css' %}">
+<div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>CATEGORIES</h2>
+            <p>Explore our wide range of products.</p>
+            <a href="{%url 'home:category'%}" class="btn btn-dark" >View more of what you may desire altogether </a>
+        </div>
+
+        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>FILTER</h2>
+            <p>click to add more specific details for your product.</p>
+            <a href="#" class="btn btn-dark">click </a>
+        </div>
+
+        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>TOP PRODUCTS  </h2>
+            <p>see which products has been sold the most in last month</p>
+            <a href="#" class="btn btn-dark">View</a>
+        </div>
+    </div>
+{% for product in products %}
+  <div class="card" style="width: 18rem; display:inline-block ">
+      <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text"> details: {{product.description|truncatewords:20}}.</p>
+      <a href="{%url 'home:detail' product_id=product.id %}" class="btn btn-primary" >see more</a>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

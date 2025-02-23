@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="mainContainer" class="fullSizeBg" style="padding: 20px; color:white; ">
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h1>Welcome to Our Store</h1>
+    </div>
+
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>Products</h2>
+            <p>Explore our wide range of products.</p>
+            <a href="{% url 'home:product' %}" class="btn btn-dark">View Products</a>
+        </div>
+
+        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>FAQ</h2>
+            <p>Find answers to common questions.</p>
+            <a href="#" class="btn btn-dark">Read FAQ</a>
+        </div>
+
+        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
+            <h2>Your Shopping List</h2>
+            <p>Manage your shopping list.</p>
+            <a href="#" class="btn btn-dark">View List</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

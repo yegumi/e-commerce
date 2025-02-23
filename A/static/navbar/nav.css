@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    background: linear-gradient(45deg, #696969, #2f4f4f);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.top-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+.top-bar a:hover {
+    color: #dcdcdc;
+}
+
+.bg-dark-navbar {
+    background: linear-gradient(45deg, #2f4f4f, #000000);
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    transition: background 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}

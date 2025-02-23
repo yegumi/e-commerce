@@ -1,0 +1,50 @@
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Overflow</title>
+    {% block styling %}
+    <link rel="stylesheet" href="{% static 'navbar/nav.css' %}">
+    {% endblock %}
+</head>
+<body>
+    <div class="top-bar">
+        <a href="#contact">Contact Us</a>
+        <a href="#about-website">About This Website</a>
+        <a href="#help">Help</a>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient">
+        <a  href="#">Navbar</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:about_me' %}">About Me</a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
+                </li>
+                {% endif %}
+                {% if request.user.is_admin %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home:bucket' %}">Bucket Items</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+{% block content%}
+
+{% for category in categories %}
+   <div class="card" style="width: 18rem; display:inline-block ">
+  <a class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ category.name }}
+  </a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{%url 'home:category_detail' category.slug %}">{{ category.name }}</a></li>
+    {% for sub in category.scategory.all %}
+    <li><a class="dropdown-item" href="{% url 'home:category_detail' category.slug %}">{{sub.name}}</a></li>
+  </ul>
+{% endfor %}
+
+
+  </div>
+{% endfor %}
+
+{% endblock %}
