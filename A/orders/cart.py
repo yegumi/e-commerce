@@ -33,6 +33,10 @@ class Cart:
             item["total_price"]=int(item["price"]) * item["quantity"]
             yield item
 
+    # for our context_processor
+    def __len__(self):
+        return sum(item['quantity'] for item in self.cart.values())
+
 
 
     def save(self):
