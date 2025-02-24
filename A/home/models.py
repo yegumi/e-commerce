@@ -24,7 +24,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     image=models.ImageField(null=True)
     description=models.TextField()
-    price=models.IntegerField()
+    price=models.FloatField()
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)
     available=models.BooleanField(default=True)

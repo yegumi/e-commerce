@@ -4,24 +4,34 @@
 <table class="table table-dark table-striped-columns">
    <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">row</th>
       <th scope="col">product</th>
       <th scope="col">quantity</th>
       <th scope="col">unit price</th>
       <th scope="col">total price</th>
+      <th scope="col">remove</th>
 
     </tr>
   </thead>
   <tbody>
-  {% for product in cart %}
+{% for item in items %}
     <tr>
-      <th scope="row">{{forloop.counter}}</th>
-      <td>{{product.product}}</td>
-      <td>{{product.quantity}}</td>
-      <td>{{product.price}}</td>
-      <td>{{product.total_price}}</td>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.total_price }}</td>
+        <td>
+            <a href="{% url 'orders:remove_cart' item.product.id %}">remove</a>
+        </td>
     </tr>
-  {% endfor %}
+{% endfor %}
+  <tr >
+    <td colspan="3">Total</td>
+      <td colspan="3">{{total_cost}}</td>
+  </tr>
+
+
 
   </tbody>
 </table>
