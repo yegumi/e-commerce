@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>
+    username : {{ request.user.username }}
+    total cost : {{ order.get_total_cost }}
+    {% for item in order %}
+    {{ item.product }}
+    {% endfor %}
+
+
+</h3>
+
+{% endblock %}
