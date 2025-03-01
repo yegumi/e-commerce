@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
 
-{%block content %}
-<table class="table table-dark table-striped-columns">
-   <thead>
-    <tr>
-      <th scope="col">row</th>
-      <th scope="col">product</th>
-      <th scope="col">quantity</th>
-      <th scope="col">unit price</th>
-      <th scope="col">total price</th>
-      <th scope="col">remove</th>
+{% block content %}
 
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Unit Price</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Remove</th>
     </tr>
-  </thead>
-  <tbody>
-{% for item in items %}
+    </thead>
+    <tbody>
+    {% for item in cart %}
     <tr>
         <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ item.product.name }}</td>
+        <td>{{ item.product }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.price }}</td>
         <td>{{ item.total_price }}</td>
-        <td>
-            <a href="{% url 'orders:remove_cart' item.product.id %}">remove</a>
-        </td>
+        <td><a href="{% url 'orders:remove_cart' item.product.id %}">remove</a></td>
     </tr>
-{% endfor %}
-  <tr >
-    <td colspan="3">Total</td>
-      <td colspan="3">{{total_cost}}</td>
-  </tr>
+    {% endfor %}
 
- <a href="{% url 'orders:order_create' %}"> CHECK OUT </a>
+    <tr>
+        <td>Total</td>
+        <td colspan="4"></td>
+        <td>{{ cart.get_total_price }}</td>
+    </tr>
 
-
-  </tbody>
+    </tbody>
 </table>
-{% endblock%}
+
+<a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
+
+{% endblock %}

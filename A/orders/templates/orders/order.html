@@ -2,13 +2,14 @@
 {% block content %}
 
 <h3>
-    username : {{ request.user.username }}
+    username : {{ request.user }}
     total cost : {{ order.get_total_cost }}
-    {% for item in order %}
-    {{ item.product }}
-    {% endfor %}
+
+  </h3>
+      <a href="#" class="button" >  PAY </a>
 
 
-</h3>
+
+
 
 {% endblock %}

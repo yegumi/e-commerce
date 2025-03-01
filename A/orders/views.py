@@ -8,24 +8,9 @@ from .models import Order, OrderItem
 
 
 class CartView(View):
-    def get(self, request):
-        cart = Cart(request)
-        items = []
-        total_cost=0
-        for product_id, item_data in cart.cart.items():
-            product = Product.objects.filter(id=product_id).first()
-            if product:
-                item_total_price=item_data['quantity'] * float(item_data['price'])
-                item = {
-                    'product': product,  # Pass the full product object
-                    'quantity': item_data['quantity'],
-                    'price': item_data['price'],
-                    'total_price': item_total_price,
-                }
-                total_cost += item_total_price
-                items.append(item)
-
-        return render(request, 'orders/cart.html', {'items': items,"total_cost":total_cost})
+	def get(self, request):
+		cart = Cart(request)
+		return render(request, 'orders/cart.html', {'cart':cart})
 
 
 class CartAddView(View):
@@ -33,10 +18,8 @@ class CartAddView(View):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
         form = CartAddForm(request.POST)
-
         if form.is_valid():
             cart.add(product, form.cleaned_data['quantity'])
-
         return redirect('orders:cart')
 
 class CartRemoveView(View):
@@ -59,7 +42,10 @@ class OrderCreateView(LoginRequiredMixin, View):
         cart=Cart(request)
         for item in cart:
             OrderItem.objects.create(order=order, product=item["product"], quantity=item["quantity"], price=item['price'])
+        print(f"Cart data before clearing: {cart.cart}")  # Debugging
         cart.clear()
+        print(f"Cart data after clearing: {cart.cart}")
 
         return redirect("orders:order_detail", order.id)
+
 
