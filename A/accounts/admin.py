@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ['is_admin']
     fieldsets = (
         (None,{'fields':('full_name','email','phone_number','birth_date','address','password')}),
-               ('permissions',{'fields':('is_active','is_admin','last_login')}),
+               ('permissions',{'fields':('is_active','is_admin','is_superuser','groups', 'user_permissions','last_login')}),
 
                  )
     add_fieldsets = (
@@ -23,10 +23,9 @@ class UserAdmin(BaseUserAdmin):
 
     search_fields = ('email','full_name')
     ordering=['full_name']
-    filter_horizontal = []
+    filter_horizontal = ['groups','user_permissions']
 
 
-admin.site.unregister(Group)
 admin.site.register(User, UserAdmin)
 
 @admin.register(OtpCode)

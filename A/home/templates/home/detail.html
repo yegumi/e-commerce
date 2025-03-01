@@ -12,10 +12,14 @@
     {{product.description}}
     <input type="submit" value="go back">
 </form>
+{%if perms.home.add_order %}
 <form action="{% url 'orders:add_cart' product.id %}" method="post">
     {% csrf_token %}
     {{form}}
     <input type="submit" value="add to cart ">
 </form>
+{%endif %}
+
+
 
 {% endblock %}

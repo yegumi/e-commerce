@@ -1,8 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import MyUserManager
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     phone_number=models.CharField(max_length=11,unique=True)
     email = models.EmailField(unique=True)
     address = models.TextField()
@@ -17,14 +17,7 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.email
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always we are going to handle permissions in somewhere else
-        return True
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always we are going to handle this somewhere else
-        return True
+
     @property
     def is_staff(self):
         return self.is_admin
@@ -42,11 +35,16 @@ class OtpCode(models.Model):
 
 
 class Favorites(models.Model):
+
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='faves')
     favorite_items=models.ForeignKey('self', on_delete=models.CASCADE)
+    class Meta:
+        verbose_name="Favorite"
+        verbose_name_plural="Favorites"
 
     def __str__(self):
         return f'{self.user.full_name} likes {self.favorite_items}'
+
 
 
 
