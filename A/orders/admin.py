@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, OrderItem
+from .models import Order, OrderItem, Coupon
 
 
 class OrderItemInlines(admin.TabularInline):
@@ -14,3 +14,5 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ("paid", )
     inlines = (OrderItemInlines,)
 
+
+admin.site.register(Coupon)

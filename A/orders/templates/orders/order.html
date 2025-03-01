@@ -6,7 +6,19 @@
     total cost : {{ order.get_total_cost }}
 
   </h3>
-      <a href="#" class="button" >  PAY </a>
+      <a href="#" class="btn btn-primary" >  PAY </a>
+
+<form action="{% url 'orders:apply_coupon' order.id %}" method="post" novalidate>
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="apply coupon">
+
+
+</form>
+
+
+
+
 
 
 
