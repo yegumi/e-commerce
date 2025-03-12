@@ -9,7 +9,7 @@
     <br>
     {{product.price}}
     <br>
-    {{product.description}}
+    {{product.description|safe}}
     <input type="submit" value="go back">
 </form>
 {%if perms.home.add_order %}

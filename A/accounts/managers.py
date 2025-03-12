@@ -19,5 +19,6 @@ class MyUserManager(BaseUserManager):
     def create_superuser(self, phone_number,email,address,password,full_name):
         user=self.create_user( phone_number,email,address,password,full_name)
         user.is_admin=True
+        user.is_superuser=True
         user.save(using=self._db)
         return user

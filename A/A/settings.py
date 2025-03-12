@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 
 # Application definition
@@ -46,7 +45,8 @@ INSTALLED_APPS = [
 
     # third-party apps
     'django_celery_beat',
-    'storages'
+    'storages',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -97,6 +97,15 @@ DATABASES = {
 
     }
 }
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+
 
 
 # Password validation
@@ -163,7 +172,11 @@ AWS_UPLOAD_STORAGE=f'{BASE_DIR}/upload/'
 
 
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',  # You can use 'Full', 'Basic', or create a custom toolbar
 
-
+    }
+}
 
 
