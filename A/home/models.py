@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from ckeditor.fields import RichTextField
+
 
 User = settings.AUTH_USER_MODEL
 class Category(models.Model):
@@ -24,7 +24,7 @@ class Product(models.Model):
     name=models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     image=models.ImageField(null=True)
-    description= RichTextField()
+    description= models.TextField()
     price=models.FloatField()
     created=models.DateTimeField(auto_now_add=True)
     updated=models.DateTimeField(auto_now=True)

@@ -50,9 +50,6 @@ class OrderCreateView(LoginRequiredMixin, View):
         cart=Cart(request)
         for item in cart:
             OrderItem.objects.create(order=order, product=item["product"], quantity=item["quantity"], price=item['price'])
-        print(f"Cart data before clearing: {cart.cart}")  # Debugging
-        cart.clear()
-        print(f"Cart data after clearing: {cart.cart}")
 
         return redirect("orders:order_detail", order.id)
 

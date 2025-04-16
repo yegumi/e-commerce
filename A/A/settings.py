@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api',
+
     # local apps
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
@@ -46,7 +49,8 @@ INSTALLED_APPS = [
     # third-party apps
     'django_celery_beat',
     'storages',
-    'ckeditor'
+
+
 ]
 
 MIDDLEWARE = [
@@ -178,5 +182,8 @@ CKEDITOR_CONFIGS = {
 
     }
 }
-
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}

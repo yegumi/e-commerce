@@ -1,8 +1,8 @@
 {% extends 'base.html'%}
 {% block content %}
 <form action="" method="post" novalidate>
-    <h2>{{product.name}}</h2>
     {% csrf_token %}
+    <h2>{{product.name}}</h2>
     <small>{{product.created }}</small>
     <br>
     <img src="{{product.image.url }}" alt="{{product.name}}" style="width:300px;">
