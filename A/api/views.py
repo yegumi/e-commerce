@@ -67,6 +67,29 @@ class ProductAPIView(viewsets.ViewSet):
 
 class CartAPIView(APIView):
     # permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        cart = Cart(request)
+        items = list(cart)
+        total_price = sum(item["total_price"] for item in items)
+
+        response_data = {
+            "items": [
+                {
+                    "product_id": item["product"].id,
+                    "product_name": item["product"].name,
+                    "price": str(item["product"].price),
+                    "quantity": item["quantity"],
+                    "total": str(item["total_price"]),
+                }
+                for item in items
+            ],
+            "total_price": str(total_price)
+        }
+
+        return Response(response_data, status=status.HTTP_200_OK)
+
+
     def post(self, request, pk):
         """ the cart we add here is the one we clicked on, in the ProductAPIView"""
         product=get_object_or_404(Product, pk=pk)
@@ -78,7 +101,14 @@ class CartAPIView(APIView):
             return Response({'detail': 'Product added to cart'}, status=status.HTTP_200_OK)
         return Response(ser_data.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+    def delete(self, request, pk):
+        try:
+            product=get_object_or_404(Product, pk=pk)
+        except Product.DoesNotExist:
+            return Response({"detail": "product not found."}, status=status.HTTP_404_NOT_FOUND)
+        cart = Cart(request)
+        cart.remove(product)
+        return Response({'message':'deleted'}, status=status.HTTP_200_OK)
 
 
 

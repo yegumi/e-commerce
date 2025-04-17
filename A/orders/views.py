@@ -16,11 +16,11 @@ class CartView(View):
 
 
 class CartAddView(View):
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.has_perm('orders.add_order'):
-            raise PermissionDenied
-
-        return super().dispatch(request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if not request.user.has_perm('orders.add_order'):
+    #         raise PermissionDenied
+    #
+    #     return super().dispatch(request, *args, **kwargs)
     def post(self, request, product_id):
         cart = Cart(request)
         product = get_object_or_404(Product, id=product_id)
