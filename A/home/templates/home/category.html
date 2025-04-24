@@ -1,20 +1,40 @@
-{% extends 'base.html'%}
-{% block content%}
+{% extends 'base.html' %}
+{% block content %}
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
 
-{% for category in categories %}
-   <div class="card" style="width: 18rem; display:inline-block ">
-  <a class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    {{ category.name }}
-  </a>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="{%url 'home:category_detail' category.slug %}">{{ category.name }}</a></li>
-    {% for sub in category.scategory.all %}
-    <li><a class="dropdown-item" href="{% url 'home:category_detail' category.slug %}">{{sub.name}}</a></li>
-  </ul>
-{% endfor %}
+    <h1 style="text-align: center; font-size: 2.5em; font-weight: bold; color: #5c2e00; margin-bottom: 30px;">
+        Browse Categories
+    </h1>
 
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+        {% for category in categories %}
+            <div style="background-color: #fff; border-radius: 15px; padding: 20px; width: 280px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;">
+                <h3 style="color: #5c2e00; font-size: 1.5em; margin-bottom: 10px;">{{ category.name }}</h3>
 
-  </div>
-{% endfor %}
-
+                <div class="dropdown">
+                    <a class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; font-weight: bold; text-decoration: none;"
+                       data-bs-toggle="dropdown" href="#">
+                        View Subcategories
+                    </a>
+                    <ul class="dropdown-menu" style="background-color: #fffaf4; border-radius: 10px; border: 1px solid #ebdfd1; margin-top: 10px;">
+                        <li>
+                            <a class="dropdown-item" href="{% url 'home:category_detail' category.slug %}" style="color: #5c2e00; font-weight: bold;">
+                                All {{ category.name }}
+                            </a>
+                        </li>
+                        {% for sub in category.category.all %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'home:category_detail' sub.slug %}" style="color: #7a5c3e;">
+                                    {{ sub.name }}
+                                </a>
+                            </li>
+                        {% empty %}
+                            <li><span class="dropdown-item text-muted">No subcategories</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

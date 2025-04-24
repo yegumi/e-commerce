@@ -14,10 +14,12 @@ urlpatterns=[
     path('', views.HomeView.as_view(),name='home'),
     path('aboutme/', views.AboutMeView.as_view(),name='about_me'),
     path('product/',views.ProductView.as_view(), name='product'),
-    path('product/detail/<int:product_id>',views.ProductDetailView.as_view(), name='detail'),
+    path('product/comment/<int:product_id>/',views.AddCommentView.as_view(), name='add_comment'),
+    path('product/detail/<int:product_id>/',views.ProductDetailView.as_view(), name='detail'),
+
     path('bucket/', views.BucketHomeView.as_view(), name='bucket'),
     path('bucket/', include(bucket_urls)),
-    path('product/category',views.CategoryView.as_view(),name='category'),
+    path('product/category/',views.CategoryView.as_view(),name='category'),
     path('product/category/detail/<slug:slug_id>',views.CategoryDetailView.as_view(),name='category_detail')
 
     ]

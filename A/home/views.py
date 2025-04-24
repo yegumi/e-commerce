@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect , get_object_or_404
 from django.views import View
-from .models import Product, Category
+from .forms import CommentForm, ReplyForm
+from .models import Product, Category , Comment
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .tasks import all_bucket_objects_tasks
 from orders.forms import CartAddForm
@@ -50,9 +51,21 @@ class CategoryDetailView(View):
         return render(request, 'home/category_detail.html', {'products': products})
 
 
+class AddCommentView(View):
+    def get(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        form = CommentForm()
+        return render(request, 'home/add_comment.html', {'product': product, 'form': form})
 
-
-
+    def post(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            cd=form.cleaned_data
+            Comment.objects.create(user=request.user,product=product,body=cd['body'])
+            return redirect('home:detail', product_id=product.id)
+            # if form is invalid, re-render with errors
+        return render(request, 'home/add_comment.html', {'product': product, 'form': form})
 
 class BucketHomeView(IsUserAdminMixin, View):
     def get(self, request):

@@ -1,24 +1,73 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-<form action="" method="post" novalidate>
-    {% csrf_token %}
-    <h2>{{product.name}}</h2>
-    <small>{{product.created }}</small>
-    <br>
-    <img src="{{product.image.url }}" alt="{{product.name}}" style="width:300px;">
-    <br>
-    {{product.price}}
-    <br>
-    {{product.description|safe}}
-    <input type="submit" value="go back">
-</form>
-<form action="{% url 'orders:add_cart' product.id %}" method="post">
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="add to cart ">
-</form>
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
+
+    <!-- Product Detail Section -->
+    <section style="text-align: center; margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00;">{{ product.name }}</h2>
+        <small style="color: #7a5c3e;">{{ product.created }}</small>
+
+        <div class="mt-3" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 300px; border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+
+            {% if product.video %}
+                <div style="max-width: 320px;">
+                    <video width="100%" height="240" controls style="border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+                        <source src="{{ product.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mt-4">
+            <h4 style="font-size: 1.8em; color: #5c2e00;">Price: ${{ product.price }}</h4>
+            <p style="margin-top: 10px; color: #7a5c3e;">{{ product.description|safe }}</p>
+        </div>
+
+        <!-- Add to Cart Section with Quantity Selector -->
+        <div class="mt-4" style="display: flex; justify-content: center; gap: 20px; flex-direction: column;">
+            <form action="{% url 'orders:add_cart' product.id %}" method="post" style="display: inline-block;">
+                {% csrf_token %}
+                <div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                    <label for="quantity" style="font-size: 1.2em; color: #7a5c3e;">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" style="padding: 10px; border-radius: 10px; border: 1px solid #ddd; width: 80px; text-align: center;">
+                </div>
+                <button class="btn" type="submit" style="padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Add to Cart</button>
+            </form>
+
+            <!-- Go Back Button -->
+            <form action="" method="post" novalidate style="display: inline-block; margin-top: 20px;">
+                {% csrf_token %}
+                <button class="btn" type="submit" style="padding: 12px 25px; background-color: #5c2e00; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Go Back</button>
+            </form>
+        </div>
+    </section>
+      <!-- Comments Section -->
+    <a href="{% url 'home:add_comment' product.id %}" style="display: block; text-align: center; margin-bottom: 20px; font-weight: bold; color: #7a4b15;">Leave a Comment</a>
+    <section style="background-color: #fff; padding: 30px 20px; margin-bottom: 50px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+        <h2 style="color: #5c2e00; font-size: 2em; margin-bottom: 20px;">User Comments</h2>
+        {% if product.pcomments.all %}
+            {% for comment in product.pcomments.all %}
+            <div style="background-color: #f4f4f4; padding: 15px; margin-bottom: 15px; border-radius: 10px;">
+                <h4 style="color: #7a4b15; font-size: 1.4em;">{{ comment.user.full_name }}</h4>
+                <p style="color: #7a5c3e; font-size: 1.1em;">{{ comment.body }}</p>
+                {% if comment.reply %}
+                    <div style="background-color: #e9e9e9; padding: 10px; margin-top: 10px; border-radius: 8px;">
+                        <strong style="color: #5c2e00;">Reply:</strong>
+                        <p style="color: #7a5c3e; font-size: 1.1em;">{{ comment.reply }}</p>
+                    </div>
+                {% endif %}
+
+                <p style="font-size: 0.9em; color: #999;">{{ comment.created|date:"F j, Y, g:i a" }}</p>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p style="color: #7a5c3e; font-size: 1.2em;">No comments yet. Be the first to comment!</p>
+        {% endif %}
+    </section>
 
 
-
-
+</div>
 {% endblock %}

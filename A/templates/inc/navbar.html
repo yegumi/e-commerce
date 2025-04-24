@@ -1,51 +1,92 @@
 {% load static %}
+<nav class="custom-navbar">
+    <style>
+        /* Main navbar container */
+        .custom-navbar {
+            background-color: #fff8f0; /* Light color for a warm feel, matching the page */
+            padding: 15px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            font-family: 'Poppins', sans-serif; /* Matching font */
+        }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stack Overflow</title>
-    {% block styling %}
-    <link rel="stylesheet" href="{% static 'navbar/nav.css' %}">
-    {% endblock %}
-</head>
-<body>
-    <div class="top-bar">
-        <a href="#contact">Contact Us</a>
-        <a href="#about-website">About This Website</a>
-        <a href="#help">Help</a>
+        /* Navbar content container */
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Brand styling */
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #5c2e00; /* Darker brown, matching the color of headings in the content */
+            text-decoration: none;
+        }
+
+        /* Navigation links container */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Individual link styling */
+        .nav-links a {
+            text-decoration: none;
+            color: #5c2e00; /* Dark brown color for text */
+            font-weight: 500;
+            transition: color 0.3s ease; /* Smooth transition on hover */
+        }
+
+        /* Hover effect */
+        .nav-links a:hover {
+            color: #7a5c3e; /* Soft brown for hover effect */
+        }
+
+        /* Optional: Active state styling */
+        .nav-links a.active {
+            color: #7a4b15; /* Color that matches buttons, such as the 'Start Shopping' button */
+        }
+
+        /* For small screens */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                display: block;
+                padding: 10px 0;
+            }
+
+            .nav-links a {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+    <div class="nav-container">
+        <a class="brand" href="{% url 'home:home' %}">Our Store</a>
+        <ul class="nav-links">
+            <li><a href="{% url 'home:home' %}">Home</a></li>
+            <li><a href="{% url 'home:about_me' %}">About Us</a></li>
+            {% if request.user.is_authenticated %}
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                <li><a href="{% url 'accounts:register' %}">Register</a></li>
+            {% endif %}
+            {% if request.user.is_staff %}
+                <li><a href="{% url 'home:bucket' %}">Bucket Items</a></li>
+            {% endif %}
+            <li><a href="{% url 'orders:cart' %}">Cart ({{ cart|length }})</a></li>
+        </ul>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-gradient">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:about_me' %}">About Me</a>
-                </li>
-
-                {% if request.user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:register' %}">Register</a>
-                </li>
-                {% endif %}
-                {% if request.user.is_admin %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home:bucket' %}">Bucket Items</a>
-                </li>
-                {% endif %}
-                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'orders:cart' %}">Cart{{cart|length}}</a>
-                                </li>
-            </ul>
-        </div>
-    </nav>
-</body>
-</html>
+</nav>

@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.schemas import get_schema_view
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 
 urlpatterns = [
@@ -25,5 +27,9 @@ urlpatterns = [
     path('',include('home.urls')),
     path('accounts/',include('accounts.urls')),
     path('orders/', include('orders.urls')),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path("schema/",get_schema_view(title="Your Project", description="API for all things …", version="1.0.0"), name="openapi-schema", ),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

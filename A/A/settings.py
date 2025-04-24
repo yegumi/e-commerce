@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # third-party apps
     'django_celery_beat',
     'storages',
+    'drf_spectacular'
 
 
 ]
@@ -148,12 +149,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 # media files
-MEDIA_URL='/media/'
-MEDIA_ROOT=BASE_DIR/'media'
+
 
 
 
@@ -169,9 +173,10 @@ AWS_SECRET_ACCESS_KEY='7cf373ebc1465fba4ea5da8ed79999375bcf260f05b81a33d9cb259a1
 AWS_S3_ENDPOINT_URL='https://s3.ir-thr-at1.arvanstorage.ir'
 AWS_STORAGE_BUCKET_NAME='yegumi-shop'
 AWS_SERVICE_NAME='s3'
-AWS_S3_FILE_OVERRIDE = False
+AWS_S3_FILE_OVERWRITE = False
 AWS_LOCAL_STORAGE=f'{BASE_DIR}/aws/'
 AWS_UPLOAD_STORAGE=f'{BASE_DIR}/upload/'
+
 
 
 
@@ -184,6 +189,13 @@ CKEDITOR_CONFIGS = {
 }
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
+        'rest_framework_simplejwt.authentication.JWTAuthentication',],
+        'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
+
+SPECTACULAR_SETTINGS = { 'TITLE': 'Ecommerce API',
+                         'DESCRIPTION': 'for later',
+                         'VERSION': '1.0.0',
+                         'SERVE_INCLUDE_SCHEMA': False }
+
+

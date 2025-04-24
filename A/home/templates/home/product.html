@@ -1,34 +1,45 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% block content %}
-{%load static %}
+{% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'home/css/product.css' %}">
-<div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>CATEGORIES</h2>
-            <p>Explore our wide range of products.</p>
-            <a href="{%url 'home:category'%}" class="btn btn-dark" >View more of what you may desire altogether </a>
+
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
+    <!-- Category, Filter, and Top Products Section -->
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;">
+
+        <div class="card" style="background-color: #fff; padding: 20px; border-radius: 15px; width: 30%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); color: #5c2e00;">
+            <h2 style="font-size: 1.8em; font-weight: bold;">CATEGORIES</h2>
+            <p style="color: #7a5c3e; font-size: 1.1em;">Explore our wide range of products.</p>
+            <a href="{% url 'home:category' %}" class="btn" style="margin-top: 20px; padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">View More</a>
         </div>
 
-        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>FILTER</h2>
-            <p>click to add more specific details for your product.</p>
-            <a href="#" class="btn btn-dark">click </a>
+        <div class="card" style="background-color: #fff; padding: 20px; border-radius: 15px; width: 30%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); color: #5c2e00;">
+            <h2 style="font-size: 1.8em; font-weight: bold;">FILTER</h2>
+            <p style="color: #7a5c3e; font-size: 1.1em;">Click to add more specific details for your product.</p>
+            <a href="#" class="btn" style="margin-top: 20px; padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">Click</a>
         </div>
 
-        <div class="card" style="background-color: #fff; padding: 5px; margin: 5px; border-radius: 5px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>TOP PRODUCTS  </h2>
-            <p>see which products has been sold the most in last month</p>
-            <a href="#" class="btn btn-dark">View</a>
+        <div class="card" style="background-color: #fff; padding: 20px; border-radius: 15px; width: 30%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); color: #5c2e00;">
+            <h2 style="font-size: 1.8em; font-weight: bold;">TOP PRODUCTS</h2>
+            <p style="color: #7a5c3e; font-size: 1.1em;">See which products have been sold the most last month.</p>
+            <a href="#" class="btn" style="margin-top: 20px; padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">View</a>
         </div>
+
     </div>
-{% for product in products %}
-  <div class="card" style="width: 18rem; display:inline-block ">
-      <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">
-    <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text"> details: {{product.description|safe|truncatewords:20}}.</p>
-      <a href="{%url 'home:detail' product_id=product.id %}" class="btn btn-primary" >see more</a>
+
+    <!-- Product List Section -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+        {% for product in products %}
+        <div class="card" style="background-color: #fff; padding: 20px; border-radius: 15px; width: 250px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); color: #00008B;">
+            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+            <div class="card-body" style="text-align: center;">
+                <h5 class="card-title" style="font-size: 1.4em; color: #5c2e00;">{{ product.name }}</h5>
+                <p class="card-text" style="color: #7a5c3e; font-size: 1em;">{{ product.description|safe|truncatewords:20 }}</p>
+                <a href="{% url 'home:detail' product_id=product.id %}" class="btn" style="padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">See More</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-  </div>
-{% endfor %}
+
+</div>
 {% endblock %}

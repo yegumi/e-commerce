@@ -17,6 +17,7 @@ import pytz
 
 # accounts views
 class UserRegisterAPIView(viewsets.ViewSet):
+    serializer_class=UserRegisterSerializer
     def create(self, request):
         if request.user and request.user.is_authenticated:
             return Response({"detail": "You are already logged in."}, status=status.HTTP_400_BAD_REQUEST)
@@ -51,11 +52,12 @@ class UserLoginAPIView(APIView):
 
 class UserLogoutView(APIView):
     pass
-#   loging out will be decided in future idk if i should handle it in front-end by removing it from client side or not
+#   loging out will be decided in future idk if i should handle it in front-end by removing client data  from client side or not
 
 # home views
 
 class ProductAPIView(viewsets.ViewSet):
+    serializer_class=ProductSerializer
     querysets = Product.objects.all()
     def list(self, request):
         ser_data=ProductSerializer(instance=self.querysets, many=True)
@@ -66,7 +68,7 @@ class ProductAPIView(viewsets.ViewSet):
         return Response(ser_data.data, status=status.HTTP_200_OK)
 
 class CartAPIView(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         cart = Cart(request)
@@ -91,6 +93,7 @@ class CartAPIView(APIView):
 
 
     def post(self, request, pk):
+        serializer_class=CartAddSerializer
         """ the cart we add here is the one we clicked on, in the ProductAPIView"""
         product=get_object_or_404(Product, pk=pk)
         ser_data=CartAddSerializer(data=request.data)

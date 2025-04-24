@@ -1,16 +1,72 @@
 {% extends 'base.html' %}
+{% block content %}
 {% load static %}
-{% block myimg %}
-  <img src="{% static 'home/img/unnamed.jpg' %} " alt="my pic">
-  <link rel="stylesheet" href="{% static 'home/css/aboutme.css' %}">
-  <p>
-    hi guys; my name is Yegumi; not my official name but I'd rather be called by that. it's somehow my very first experience in django;
-    right after my final exams finished in university i started to learn django. I'm so ashamed to say I'm very ponderous in learning staff;but
-    I really was fliping out, wandering around with no purpose and no serious skill; I tried my best all summer to learn sth and I have so much to do
-    this Tut is probably gonna last longer than I expected cause it's like 2 or 3 hours (since 7:15 am today) that I'm watching a 14 min session;
-    I watched tut onetime then try to do it by myself amd ofc i waste so much time by this method but I'm reaaly hopefull that I will learn things better
-    this way;so excuse me if i just rant alot but sometimes i think i have to talk otherwise everything is going to cascade around me. when i started sth i could
-    not see myself in future of it but rn i feel so contend about what I'm seizing. goodluck everybody someday i will organize a reall website and have real users.
-    i wanna be sth. just sth . i wanna rely on myself in future. i yearn it so bad.. God hear me out
-  </p>
+
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
+
+    <!-- About Us Section -->
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00; text-align: center;">About Us</h2>
+        <p style="color: #7a5c3e; font-size: 1.1em; max-width: 800px; margin: 0 auto; text-align: center;">We are a passionate team dedicated to bringing you the best online shopping experience. Here's a little more about us:</p>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 30px;">
+            <div style="text-align: center; width: 300px;">
+                <img src="{% static 'home/img/company-image1.jpg' %}" alt="Company Image 1" style="width: 250px; height: 200px; border-radius: 15px; margin-bottom: 15px;">
+                <h3 style="color: #5c2e00;">Our Values</h3>
+                <p style="color: #7a5c3e;">We are committed to quality, trust, and customer satisfaction.</p>
+            </div>
+
+            <div style="text-align: center; width: 300px;">
+                <img src="{% static 'home/img/company-image2.jpg' %}" alt="Company Image 2" style="width: 250px; height: 200px; border-radius: 15px; margin-bottom: 15px;">
+                <h3 style="color: #5c2e00;">Our Mission</h3>
+                <p style="color: #7a5c3e;">Delivering the best products and an exceptional shopping experience to our customers.</p>
+            </div>
+
+            <div style="text-align: center; width: 300px;">
+                <img src="{% static 'home/img/company-image3.jpg' %}" alt="Company Image 3" style="width: 250px; height: 200px; border-radius: 15px; margin-bottom: 15px;">
+                <h3 style="color: #5c2e00;">Our Commitment</h3>
+                <p style="color: #7a5c3e;">We strive to continually improve our products and services to meet your needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media and Contact Section -->
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00; text-align: center;">Connect With Us</h2>
+        <p style="color: #7a5c3e; font-size: 1.1em; max-width: 800px; margin: 0 auto; text-align: center;">Follow us on our social media platforms for the latest updates, promotions, and more.</p>
+        <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px;">
+            <a href="https://facebook.com" target="_blank" style="text-decoration: none; font-size: 1.5em; color: #3b5998;">Facebook</a>
+            <a href="https://twitter.com" target="_blank" style="text-decoration: none; font-size: 1.5em; color: #00acee;">Twitter</a>
+            <a href="https://instagram.com" target="_blank" style="text-decoration: none; font-size: 1.5em; color: #8a3ab9;">Instagram</a>
+        </div>
+    </section>
+
+    <!-- Physical Address Section -->
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00; text-align: center;">Our Location</h2>
+        <p style="color: #7a5c3e; font-size: 1.1em; max-width: 800px; margin: 0 auto; text-align: center;">Visit us at our physical location, or contact us for more details:</p>
+        <div style="text-align: center; font-size: 1.2em; color: #7a5c3e;">
+            <p>123 Business Avenue, Suite 456, Cityville, Country</p>
+        </div>
+    </section>
+
+    <!-- Buying Instructions Section -->
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00; text-align: center;">How to Buy From Us</h2>
+        <ol style="color: #7a5c3e; font-size: 1.1em; max-width: 800px; margin: 0 auto; text-align: left;">
+            <li>Browse our products and select the items you wish to purchase.</li>
+            <li>Add them to your cart and proceed to checkout.</li>
+            <li>Fill in your delivery and payment information.</li>
+            <li>Review your order and confirm your purchase.</li>
+            <li>Wait for your confirmation email with tracking details.</li>
+        </ol>
+    </section>
+
+    <!-- Our Story Section -->
+    <section style="margin-bottom: 50px;">
+        <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00; text-align: center;">Our Story</h2>
+        <p style="color: #7a5c3e; font-size: 1.1em; max-width: 800px; margin: 0 auto; text-align: center;">Our website was born out of a passion for providing the best shopping experience to customers worldwide. From humble beginnings, we have grown into a trusted destination for all your shopping needs. We are constantly improving and evolving to serve you better. Join us on this exciting journey!</p>
+    </section>
+
+</div>
 {% endblock %}

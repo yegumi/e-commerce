@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="mainContainer" class="fullSizeBg" style="padding: 20px; color:white; ">
-    {% csrf_token %}
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h1>Welcome to Our Store</h1>
-    </div>
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
 
-    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>Products</h2>
-            <p>Explore our wide range of products.</p>
-            <a href="{% url 'home:product' %}" class="btn btn-dark">View Products</a>
+    <!-- Hero Section -->
+    <section style="text-align: center; margin-bottom: 50px;">
+        <h1 style="font-size: 3em; font-weight: bold; color: #5c2e00;">Welcome to Our Store</h1>
+        <p style="color: #7a5c3e; font-size: 1.2em; max-width: 700px; margin: 0 auto;">Browse our selection and enjoy a delightful shopping experience with carefully curated items just for you.</p>
+        <a href="{% url 'home:product' %}" class="btn" style="margin-top: 20px; padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">Start Shopping</a>
+    </section>
+
+    <!-- Feature Cards Section -->
+    <section style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+        <div style="background-color: #fff; border-radius: 15px; padding: 30px; width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1046/1046751.png" alt="Product Icon" style="width: 60px; margin-bottom: 20px;">
+            <h3 style="color: #5c2e00;">Products</h3>
+            <p style="color: #7a5c3e;">Explore our wide range of products tailored for your needs.</p>
+            <a href="{% url 'home:product' %}" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">View Products</a>
         </div>
 
-        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>FAQ</h2>
-            <p>Find answers to common questions.</p>
-            <a href="#" class="btn btn-dark">Read FAQ</a>
+        <div style="background-color: #fff; border-radius: 15px; padding: 30px; width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/929/929436.png" alt="FAQ Icon" style="width: 60px; margin-bottom: 20px;">
+            <h3 style="color: #5c2e00;">FAQ</h3>
+            <p style="color: #7a5c3e;">Have questions? We’ve got answers for you.</p>
+            <a href="#" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">Read FAQ</a>
         </div>
 
-        <div class="card" style="background-color: #fff; padding: 20px; margin: 10px; border-radius: 10px; width: 30%; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: #00008B;">
-            <h2>Your Shopping List</h2>
-            <p>Manage your shopping list.</p>
-            <a href="#" class="btn btn-dark">View List</a>
+        <div style="background-color: #fff; border-radius: 15px; padding: 30px; width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="List Icon" style="width: 60px; margin-bottom: 20px;">
+            <h3 style="color: #5c2e00;">Your Shopping List</h3>
+            <p style="color: #7a5c3e;">Keep track of your favorites and essentials.</p>
+            <a href="#" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">View List</a>
         </div>
-    </div>
-
+    </section>
 </div>
 {% endblock %}
