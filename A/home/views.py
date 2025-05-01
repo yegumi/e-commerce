@@ -27,14 +27,30 @@ class ProductView(View):
     def post(self, request):
         pass
 
-class ProductDetailView(View):
+class ProductDetailView(LoginRequiredMixin,View):
     def get(self, request , product_id):
         product=get_object_or_404(Product,id=product_id )
         form=CartAddForm()
-        return render (request,'home/detail.html',{'product': product,'form':form } )
+        reply = CommentForm()
+        return render (request,'home/detail.html',{'product': product,'form':form,'reply':reply } )
 
-    def post(self, request, product_id):
-        return redirect('home:product')
+    def post(self, request, product_id, *args, **kwargs):
+        comment_id = request.POST.get('comment_id')
+        reply_form = CommentForm(request.POST)
+
+        if reply_form.is_valid():
+            cd = reply_form.cleaned_data
+            parent_comment = Comment.objects.get(id=comment_id)
+
+            Comment.objects.create(
+                user=request.user,
+                body=cd['body'],
+                product=get_object_or_404(Product, id=product_id),
+                reply=parent_comment,
+                is_reply=True
+            )
+
+        return redirect('home:detail', product_id=product_id)
 
 
 class CategoryView(View):
@@ -55,7 +71,7 @@ class AddCommentView(View):
     def get(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
         form = CommentForm()
-        return render(request, 'home/add_comment.html', {'product': product, 'form': form})
+        return render(request, 'home/add_comment.html', {'product': product, 'form': form, })
 
     def post(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
@@ -66,6 +82,12 @@ class AddCommentView(View):
             return redirect('home:detail', product_id=product.id)
             # if form is invalid, re-render with errors
         return render(request, 'home/add_comment.html', {'product': product, 'form': form})
+
+
+
+
+
+
 
 class BucketHomeView(IsUserAdminMixin, View):
     def get(self, request):

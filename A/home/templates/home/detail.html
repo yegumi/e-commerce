@@ -8,7 +8,7 @@
         <h2 style="font-size: 2.5em; font-weight: bold; color: #5c2e00;">{{ product.name }}</h2>
         <small style="color: #7a5c3e;">{{ product.created }}</small>
 
-        <div class="mt-3" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; justify-content: center;">
+        <div class="mt-3" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
             <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 300px; border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
 
             {% if product.video %}
@@ -38,36 +38,81 @@
             </form>
 
             <!-- Go Back Button -->
-            <form action="" method="post" novalidate style="display: inline-block; margin-top: 20px;">
-                {% csrf_token %}
-                <button class="btn" type="submit" style="padding: 12px 25px; background-color: #5c2e00; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Go Back</button>
-            </form>
+
+        </section>
+
+        <!-- Comments Section -->
+
+    <section style="max-width: 800px; margin: 0 auto;">
+         <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+        <a href="{% url 'home:add_comment' product.id %}" style="padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease; text-align: center;">
+            ✍️ Leave a Comment
+        </a>
+        <a href="javascript:history.back()" style="padding: 12px 25px; background-color: #5c2e00; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease; text-align: center;">
+            ← Go Back
+        </a>
+    </div>
+
+        <div style="background-color: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+            <h2 style="color: #5c2e00; font-size: 2em; margin-bottom: 25px; border-bottom: 2px solid #f0e6d6; padding-bottom: 10px;">User Comments</h2>
+
+            {% if product.pcomments.all %}
+                {% for comment in product.pcomments.all %}
+                    {% if not comment.is_reply %}
+                    <!-- Main Comment -->
+                    <div style="background-color: #f9f5f0; padding: 20px; margin-bottom: 20px; border-radius: 12px; border-left: 4px solid #d4a373;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                            <div style="width: 40px; height: 40px; background-color: #d4a373; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                {{ comment.user.full_name|first|upper }}
+                            </div>
+                            <div>
+                                <h4 style="color: #5c2e00; font-size: 1.2em; margin: 0;">{{ comment.user.full_name }}</h4>
+                                <p style="font-size: 0.8em; color: #a38b70; margin: 0;">{{ comment.created|date:"F j, Y, g:i a" }}</p>
+                            </div>
+                        </div>
+                        <p style="color: #5c2e00; font-size: 1.1em; line-height: 1.5; margin: 15px 0;">{{ comment.body }}</p>
+
+                        <!-- Replies Section -->
+                        {% if comment.rcomments.all %}
+                            <div style="margin-left: 30px; padding-left: 20px; border-left: 2px dashed #e0c9b1;">
+                                {% for reply in comment.rcomments.all %}
+                                    {% if reply.is_reply %}
+                                    <div style="background-color: #fefcf9; padding: 15px; margin: 15px 0; border-radius: 8px; border-left: 3px solid #e0c9b1;">
+                                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                                            <div style="width: 30px; height: 30px; background-color: #e0c9b1; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.8em;">
+                                                {{ reply.user.full_name|first|upper }}
+                                            </div>
+                                            <div>
+                                                <h5 style="color: #7a4b15; font-size: 1em; margin: 0;">{{ reply.user.full_name }}</h5>
+                                                <p style="font-size: 0.7em; color: #a38b70; margin: 0;">{{ reply.created|date:"F j, Y, g:i a" }}</p>
+                                            </div>
+                                        </div>
+                                        <p style="color: #7a5c3e; font-size: 1em; line-height: 1.4; margin: 10px 0 0 0;">{{ reply.body }}</p>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <!-- Reply Form -->
+                        <div style="margin-top: 20px;">
+                            <form action="{% url 'home:detail' product.id %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                <textarea name="body" placeholder="Write your reply..." style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #e0c9b1; margin-bottom: 10px; background-color: #fefcf9; color: #5c2e00; min-height: 80px;"></textarea>
+                                <button type="submit" style="padding: 8px 20px; background-color: #d4a373; color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 500; transition: all 0.3s ease;">Post Reply</button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div style="text-align: center; padding: 30px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081840.png" alt="No comments" style="width: 80px; opacity: 0.6; margin-bottom: 20px;">
+                    <p style="color: #a38b70; font-size: 1.2em;">No comments yet. Be the first to share your thoughts!</p>
+                </div>
+            {% endif %}
         </div>
     </section>
-      <!-- Comments Section -->
-    <a href="{% url 'home:add_comment' product.id %}" style="display: block; text-align: center; margin-bottom: 20px; font-weight: bold; color: #7a4b15;">Leave a Comment</a>
-    <section style="background-color: #fff; padding: 30px 20px; margin-bottom: 50px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-        <h2 style="color: #5c2e00; font-size: 2em; margin-bottom: 20px;">User Comments</h2>
-        {% if product.pcomments.all %}
-            {% for comment in product.pcomments.all %}
-            <div style="background-color: #f4f4f4; padding: 15px; margin-bottom: 15px; border-radius: 10px;">
-                <h4 style="color: #7a4b15; font-size: 1.4em;">{{ comment.user.full_name }}</h4>
-                <p style="color: #7a5c3e; font-size: 1.1em;">{{ comment.body }}</p>
-                {% if comment.reply %}
-                    <div style="background-color: #e9e9e9; padding: 10px; margin-top: 10px; border-radius: 8px;">
-                        <strong style="color: #5c2e00;">Reply:</strong>
-                        <p style="color: #7a5c3e; font-size: 1.1em;">{{ comment.reply }}</p>
-                    </div>
-                {% endif %}
-
-                <p style="font-size: 0.9em; color: #999;">{{ comment.created|date:"F j, Y, g:i a" }}</p>
-            </div>
-            {% endfor %}
-        {% else %}
-            <p style="color: #7a5c3e; font-size: 1.2em;">No comments yet. Be the first to comment!</p>
-        {% endif %}
-    </section>
-
-
 </div>
 {% endblock %}
