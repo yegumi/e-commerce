@@ -17,6 +17,10 @@ class AboutMeView (View):
     def get(self, request):
         return render(request, 'home/aboutme.html')
 
+class FAQ(View):
+    def get(self, request):
+        return render(request, 'home/faq.html')
+
 
 
 

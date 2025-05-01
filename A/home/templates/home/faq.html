@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif;">
+
+    <!-- Hero Section -->
+    <section style="text-align: center; margin-bottom: 50px;">
+        <h1 style="font-size: 3em; font-weight: bold; color: #5c2e00;">Welcome to Our Store</h1>
+        <p style="color: #7a5c3e; font-size: 1.2em; max-width: 700px; margin: 0 auto;">Browse our selection and enjoy a delightful shopping experience with carefully curated items just for you.</p>
+        <a href="{% url 'home:product' %}" class="btn" style="margin-top: 20px; padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none;">Start Shopping</a>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background-color: #fff; padding: 30px 20px; border-radius: 15px;">
+        <h2 style="color: #5c2e00; text-align: center; margin-bottom: 30px;">Frequently Asked Questions</h2>
+
+        <div style="border-bottom: 1px solid #f1f1f1; padding-bottom: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">1. What products do you sell?</h3>
+            <p style="color: #7a5c3e;">We offer a wide range of high-quality products including fashion, electronics, and home goods, all selected with care to meet your needs.</p>
+        </div>
+
+        <div style="border-bottom: 1px solid #f1f1f1; padding-bottom: 15px; margin-top: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">2. How do I place an order?</h3>
+            <p style="color: #7a5c3e;">To place an order, simply browse our products, select your desired items, add them to your cart, and proceed to checkout.</p>
+        </div>
+
+        <div style="border-bottom: 1px solid #f1f1f1; padding-bottom: 15px; margin-top: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">3. What payment methods do you accept?</h3>
+            <p style="color: #7a5c3e;">We accept various payment methods including credit/debit cards, PayPal, and bank transfers for your convenience.</p>
+        </div>
+
+        <div style="border-bottom: 1px solid #f1f1f1; padding-bottom: 15px; margin-top: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">4. How do I track my order?</h3>
+            <p style="color: #7a5c3e;">Once your order is shipped, you will receive a tracking number via email. You can use this number to track your order on the courier’s website.</p>
+        </div>
+
+        <div style="border-bottom: 1px solid #f1f1f1; padding-bottom: 15px; margin-top: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">5. Can I return or exchange my purchase?</h3>
+            <p style="color: #7a5c3e;">Yes, we offer returns and exchanges within 30 days of purchase, provided the item is in its original condition. Please visit our returns page for more details.</p>
+        </div>
+
+        <div style="padding-bottom: 15px; margin-top: 15px;">
+            <h3 style="color: #5c2e00; font-size: 1.2em;">6. How can I contact customer support?</h3>
+            <p style="color: #7a5c3e;">You can contact our customer support team via email at support@ourstore.com or by calling our helpline at 123-456-7890.</p>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

@@ -22,14 +22,14 @@
             <img src="https://cdn-icons-png.flaticon.com/512/929/929436.png" alt="FAQ Icon" style="width: 60px; margin-bottom: 20px;">
             <h3 style="color: #5c2e00;">FAQ</h3>
             <p style="color: #7a5c3e;">Have questions? We’ve got answers for you.</p>
-            <a href="#" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">Read FAQ</a>
+            <a href="{%url 'home:faq'%}" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">Read FAQ</a>
         </div>
 
         <div style="background-color: #fff; border-radius: 15px; padding: 30px; width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: center;">
             <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="List Icon" style="width: 60px; margin-bottom: 20px;">
             <h3 style="color: #5c2e00;">Your Shopping List</h3>
             <p style="color: #7a5c3e;">Keep track of your favorites and essentials.</p>
-            <a href="#" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">View List</a>
+            <a href="{% url 'orders:cart' %}" class="btn" style="padding: 10px 20px; background-color: #7a4b15; color: white; border-radius: 25px; text-decoration: none;">View List</a>
         </div>
     </section>
 </div>

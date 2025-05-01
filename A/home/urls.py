@@ -13,6 +13,7 @@ bucket_urls=[
 urlpatterns=[
     path('', views.HomeView.as_view(),name='home'),
     path('aboutme/', views.AboutMeView.as_view(),name='about_me'),
+    path('faq/', views.FAQ.as_view(),name='faq'),
     path('product/',views.ProductView.as_view(), name='product'),
     path('product/detail/<int:product_id>/', views.ProductDetailView.as_view(), name='detail'),
     path('product/comment/<int:product_id>/',views.AddCommentView.as_view(), name='add_comment'),

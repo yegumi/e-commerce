@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
-{% load static %}
-{%block login_style %}
-<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
-{% endblock %}
-{% block content%}
-<form action="" method="post" novalidate>
-  {% csrf_token %}
-  {{form.as_p}}
-  <input class=form-control" type="submit" value="login">
-</form>
+{% block content %}
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center;">
+    <div style="background-color: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); width: 100%; max-width: 500px;">
+        <!-- Login Header -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color: #5c2e00; font-size: 2em; margin-bottom: 10px;">Welcome Back</h2>
+            <p style="color: #7a5c3e;">Sign in to your account</p>
+            <div style="width: 50px; height: 3px; background-color: #d4a373; margin: 15px auto;"></div>
+        </div>
+
+        <!-- Original Form (completely unchanged) -->
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="form-control" type="submit" value="Login" style="width: 100%; padding: 12px; background-color: #7a4b15; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px;">
+        </form>
+
+        <!-- Additional Links -->
+        <div style="text-align: center; margin-top: 25px;">
+            <p style="color: #7a5c3e;">
+                <a href="#" style="color: #d4a373; text-decoration: none; margin-right: 15px;">Forgot password?</a>
+                <a href="{% url 'accounts:register' %}" style="color: #d4a373; text-decoration: none;">Create account</a>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}

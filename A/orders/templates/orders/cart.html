@@ -1,39 +1,58 @@
 {% extends 'base.html' %}
-
 {% block content %}
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif; min-height: 100vh;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <h1 style="color: #5c2e00; font-size: 2.5em; margin-bottom: 30px; text-align: center;">Your Shopping Cart</h1>
 
-<table class="table table-dark table-striped">
-    <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Unit Price</th>
-        <th scope="col">Total Price</th>
-        <th scope="col">Remove</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for item in cart %}
-    <tr>
-        <th scope="row">{{ forloop.counter }}</th>
-        <td>{{ item.product }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.total_price }}</td>
-        <td><a href="{% url 'orders:remove_cart' item.product.id %}">remove</a></td>
-    </tr>
-    {% endfor %}
+        <!-- Cart Table -->
+        <div style="background-color: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); margin-bottom: 30px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #f0e6d6;">
+                        <th style="padding: 15px; text-align: left; color: #5c2e00;">#</th>
+                        <th style="padding: 15px; text-align: left; color: #5c2e00;">Product</th>
+                        <th style="padding: 15px; text-align: center; color: #5c2e00;">Quantity</th>
+                        <th style="padding: 15px; text-align: right; color: #5c2e00;">Unit Price</th>
+                        <th style="padding: 15px; text-align: right; color: #5c2e00;">Total</th>
+                        <th style="padding: 15px; text-align: center; color: #5c2e00;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                    <tr style="border-bottom: 1px solid #f0e6d6;">
+                        <td style="padding: 15px; color: #7a5c3e;">{{ forloop.counter }}</td>
+                        <td style="padding: 15px; color: #5c2e00; font-weight: 500;">{{ item.product }}</td>
+                        <td style="padding: 15px; text-align: center; color: #7a5c3e;">{{ item.quantity }}</td>
+                        <td style="padding: 15px; text-align: right; color: #7a5c3e;">${{ item.price }}</td>
+                        <td style="padding: 15px; text-align: right; color: #5c2e00; font-weight: 500;">${{ item.total_price }}</td>
+                        <td style="padding: 15px; text-align: center;">
+                            <a href="{% url 'orders:remove_cart' item.product.id %}" style="color: #c27e3d; text-decoration: none; transition: all 0.3s ease;">
+                                <span style="display: inline-block; padding: 5px 10px; border-radius: 5px; background-color: #f9f5f0;">Remove</span>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
 
-    <tr>
-        <td>Total</td>
-        <td colspan="4"></td>
-        <td>{{ cart.get_total_price }}</td>
-    </tr>
+                    <!-- Total Row -->
+                    <tr style="background-color: #f9f5f0; border-radius: 0 0 10px 10px;">
+                        <td style="padding: 15px; font-weight: bold; color: #5c2e00;" colspan="3">Total</td>
+                        <td style="padding: 15px;"></td>
+                        <td style="padding: 15px; text-align: right; font-weight: bold; color: #5c2e00;">${{ cart.get_total_price }}</td>
+                        <td style="padding: 15px;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    </tbody>
-</table>
-
-<a href="{% url 'orders:order_create' %}" class="btn btn-primary">Checkout</a>
-
+        <!-- Action Buttons -->
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="{% url 'home:product' %}" style="padding: 12px 25px; background-color: #f0e6d6; color: #5c2e00; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                ← Continue Shopping
+            </a>
+            <a href="{% url 'orders:order_create' %}" style="padding: 12px 25px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                Proceed to Checkout →
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

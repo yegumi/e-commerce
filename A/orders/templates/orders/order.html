@@ -1,27 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
+<div style="background-color: #fff8f0; padding: 40px 20px; font-family: 'Poppins', sans-serif; min-height: 100vh;">
+    <div style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.05);">
+        <!-- Order Summary Header -->
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color: #5c2e00; font-size: 2em; margin-bottom: 10px;">Order Summary</h2>
+            <div style="width: 50px; height: 3px; background-color: #d4a373; margin: 0 auto;"></div>
+        </div>
 
-<h3>
-    username : {{ request.user }}
-    total cost : {{ order.get_total_cost }}
+        <!-- User Info -->
+        <div style="background-color: #f9f5f0; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                <span style="color: #7a5c3e; font-weight: 500;">Username:</span>
+                <span style="color: #5c2e00; font-weight: 600;">{{ request.user }}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span style="color: #7a5c3e; font-weight: 500;">Total Cost:</span>
+                <span style="color: #5c2e00; font-size: 1.2em; font-weight: 700;">${{ order.get_total_cost }}</span>
+            </div>
+        </div>
 
-  </h3>
-      <a href="#" class="btn btn-primary" >  PAY </a>
+        <!-- Coupon Form -->
+        <form action="{% url 'orders:apply_coupon' order.id %}" method="post" novalidate style="margin-bottom: 30px;">
+            {% csrf_token %}
+            <h4 style="color: #5c2e00; margin-bottom: 15px; font-size: 1.1em;">Apply Coupon Code</h4>
+            <div style="display: flex; gap: 10px;">
+                {{ form.code }}
+                <button type="submit" style="padding: 10px 20px; background-color: #d4a373; color: white; border: none; border-radius: 25px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">
+                    Apply
+                </button>
+            </div>
+        </form>
 
-<form action="{% url 'orders:apply_coupon' order.id %}" method="post" novalidate>
-    {% csrf_token %}
-    {{form}}
-    <input type="submit" value="apply coupon">
+        <!-- Payment Button -->
+        <div style="text-align: center;">
+            <a href="#" style="display: inline-block; padding: 12px 30px; background-color: #7a4b15; color: white; border-radius: 30px; font-weight: bold; text-decoration: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                Proceed to Payment →
+            </a>
+        </div>
 
+        <!-- Back Link -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="javascript:history.back()" style="color: #7a5c3e; text-decoration: none; font-size: 0.9em;">
+                ← Back to order details
+            </a>
+        </div>
+    </div>
+</div>
 
-</form>
+<style>
+    /* Style the coupon code input to match your theme */
+    #id_code {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid #e0c9b1;
+        border-radius: 25px;
+        background-color: #fefcf9;
+        color: #5c2e00;
+        font-family: 'Poppins', sans-serif;
+    }
 
+    #id_code:focus {
+        outline: none;
+        border-color: #d4a373;
+        box-shadow: 0 0 0 2px rgba(212, 163, 115, 0.2);
+    }
 
-
-
-
-
-
-
-
+    /* Hover effects */
+    a:hover, button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+</style>
 {% endblock %}
