@@ -13,7 +13,7 @@ This is a basic e-commerce web application built with Django and Django REST Fra
 - **Image Uploads:** Product images can be uploaded by admin
 
 This project isn’t a complete product, but it's a strong step toward mastering e-commerce app development with Django and DRF. Future improvements and advanced features will be explored in other projects.
-# My Website Screenshots
+
 
 Dockerized Setup
 This project is fully dockerized for easy setup and deployment. The docker-compose.yml file configures the following services:
@@ -46,6 +46,7 @@ NOTES
 Environment variables are loaded from your .env file (make sure to create it).
 Database data is persisted using Docker volumes.
 
+# My Website Screenshots
 
 Here are some screenshots of different pages of my website:
 
@@ -54,7 +55,7 @@ Here are some screenshots of different pages of my website:
 ### Home Page  
 <img src="./assets/homepage.png" alt="Home Page" width="500"/>
 
----
+
 
 ### Register Page  
 <img src="./assets/registerpage.png" alt="Register Page" width="500"/>
