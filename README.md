@@ -13,4 +13,80 @@ This is a basic e-commerce web application built with Django and Django REST Fra
 - **Image Uploads:** Product images can be uploaded by admin
 
 This project isn’t a complete product, but it's a strong step toward mastering e-commerce app development with Django and DRF. Future improvements and advanced features will be explored in other projects.
+# My Website Screenshots
+
+Dockerized Setup
+This project is fully dockerized for easy setup and deployment. The docker-compose.yml file configures the following services:
+
+Web: Runs the Django application inside a Docker container.
+
+Postgres: Provides the database service.
+
+Redis: Used for caching and other background tasks.
+
+How to Run with Docker
+Make sure you have Docker and Docker Compose installed.
+
+Build and start the containers with:
+
+docker-compose up --build
+
+Access the app in your browser at http://localhost:8000.
+
+To apply migrations inside the container, run:
+
+docker-compose exec web python manage.py migrate
+
+To collect static files, run:
+
+docker-compose exec web python manage.py collectstatic --noinput
+
+NOTES
+
+Environment variables are loaded from your .env file (make sure to create it).
+Database data is persisted using Docker volumes.
+
+
+Here are some screenshots of different pages of my website:
+
+---
+
+### Home Page  
+<img src="./assets/homepage.png" alt="Home Page" width="500"/>
+
+---
+
+### Register Page  
+<img src="./assets/registerpage.png" alt="Register Page" width="500"/>
+
+---
+
+### Login Page  
+<img src="./assets/login.png" alt="Login Page" width="500"/>
+
+---
+
+### About Us Page  
+<img src="./assets/aboutus.png" alt="About Us Page" width="500"/>
+
+---
+
+### Product Page  
+<img src="./assets/productpage.png" alt="Product Page" width="500"/>
+
+---
+
+### Detail Page  
+<img src="./assets/detailpage.png" alt="Detail Page" width="500"/>
+
+---
+
+### Cart page
+<img src="./assets/cartpage.png" alt="cart page" width="500"/>
+
+---
+### Checkout Page  
+<img src="./assets/checkoutpage.png" alt="Checkout Page" width="500"/>
+
+---
 

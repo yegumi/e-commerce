@@ -31,7 +31,7 @@
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
         {% for product in products %}
         <div class="card" style="background-color: #fff; padding: 20px; border-radius: 15px; width: 250px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); color: #00008B;">
-            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+            <img class="card-img-top" src="{% static 'home/img/laptop.jpg' %}" alt="{{ product.name }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
             <div class="card-body" style="text-align: center;">
                 <h5 class="card-title" style="font-size: 1.4em; color: #5c2e00;">{{ product.name }}</h5>
                 <p class="card-text" style="color: #7a5c3e; font-size: 1em;">{{ product.description|safe|truncatewords:20 }}</p>

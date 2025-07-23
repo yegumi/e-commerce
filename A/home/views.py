@@ -31,7 +31,7 @@ class ProductView(View):
     def post(self, request):
         pass
 
-class ProductDetailView(LoginRequiredMixin,View):
+class ProductDetailView(View):
     def get(self, request , product_id):
         product=get_object_or_404(Product,id=product_id )
         form=CartAddForm()
