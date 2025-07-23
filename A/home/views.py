@@ -8,10 +8,31 @@ from orders.forms import CartAddForm
 from . import tasks
 from django.contrib import messages
 from utils import IsUserAdminMixin
-
+from .utils import redis_client
 class HomeView(View):
     def get(self, request):
-       return render(request, 'home/index.html')
+        # showing last 3 visited products
+        session_key = request.session.session_key
+        if not session_key:
+            request.session.create()
+            session_key = request.session.session_key
+
+        redis_key = f"visited:{session_key}"
+        product_ids = redis_client.lrange(redis_key, 0, 2)  # Get last 3 visited product ID
+        # Redis returns bytes, convert them to ints
+
+        product_ids = [int(pid) for pid in product_ids]
+
+        # Fetch product objects in the same order
+        products = Product.objects.filter(id__in=product_ids)
+
+        context = {
+            'recently_viewed': products,
+
+        }
+        return render(request, 'home/index.html', context)
+
+
 
 class AboutMeView (View):
     def get(self, request):
@@ -36,7 +57,21 @@ class ProductDetailView(View):
         product=get_object_or_404(Product,id=product_id )
         form=CartAddForm()
         reply = CommentForm()
+        # keep track of last 3 visited products
+        session_key=request.session.session_key
+        if not session_key:
+            request.session.create()
+            session_key=request.session.session_key
+        key = f"visited:{session_key}"
+        redis_client.lrem(key, 0, product_id) #remove duplicate items
+        redis_client.lpush(key, product_id)
+        redis_client.ltrim(key, 0, 2)
+
         return render (request,'home/detail.html',{'product': product,'form':form,'reply':reply } )
+
+
+
+
 
     def post(self, request, product_id, *args, **kwargs):
         comment_id = request.POST.get('comment_id')

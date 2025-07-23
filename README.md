@@ -11,6 +11,8 @@ This is a basic e-commerce web application built with Django and Django REST Fra
 - **Permissions:** Basic permissions are applied on the API side
 - **Swagger Integration:** API documentation and testing via Swagger
 - **Image Uploads:** Product images can be uploaded by admin
+- ** Redis:** Keep track of last visited items by users with sessionkeys
+
 
 This project isn’t a complete product, but it's a strong step toward mastering e-commerce app development with Django and DRF. Future improvements and advanced features will be explored in other projects.
 
@@ -55,7 +57,12 @@ Here are some screenshots of different pages of my website:
 ### Home Page  
 <img src="./assets/homepage.png" alt="Home Page" width="500"/>
 
+---
 
+### last visited items  
+<img src="./assets/lastvisited.png" alt="last visited items" width="500"/>
+
+---
 
 ### Register Page  
 <img src="./assets/registerpage.png" alt="Register Page" width="500"/>

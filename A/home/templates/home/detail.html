@@ -9,7 +9,7 @@
         <small style="color: #7a5c3e;">{{ product.created }}</small>
 
         <div class="mt-3" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-            <img src="{% static 'home/img/laptop.jpg' %}" alt="{{ product.name }}" style="width: 300px; border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
+            <img src="{{product.image.url}}" alt="{{ product.name }}" style="width: 300px; border-radius: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);">
 
             {% if product.video %}
                 <div style="max-width: 320px;">
