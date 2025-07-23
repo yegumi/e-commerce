@@ -15,7 +15,8 @@ This is a basic e-commerce web application built with Django and Django REST Fra
 This project isn’t a complete product, but it's a strong step toward mastering e-commerce app development with Django and DRF. Future improvements and advanced features will be explored in other projects.
 
 
-Dockerized Setup
+## **Dockerized Setup**
+
 This project is fully dockerized for easy setup and deployment. The docker-compose.yml file configures the following services:
 
 Web: Runs the Django application inside a Docker container.
@@ -46,11 +47,10 @@ NOTES
 Environment variables are loaded from your .env file (make sure to create it).
 Database data is persisted using Docker volumes.
 
-# My Website Screenshots
-
-Here are some screenshots of different pages of my website:
-
 ---
+
+## **My Website Screenshots**
+Here are some screenshots of different pages of my website:
 
 ### Home Page  
 <img src="./assets/homepage.png" alt="Home Page" width="500"/>
